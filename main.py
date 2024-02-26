@@ -182,9 +182,12 @@ async def handle_message(m: Message):
         and not data["file_name"].endswith(".mkv")
         and not data["file_name"].endswith(".Mkv")
         and not data["file_name"].endswith(".webm")
+        and not data["file_name"].endswith(".mov")
+        and not data["file_name"].endswith(".png")
+        and not data["file_name"].endswith(".jpg")
     ):
         return await hm.edit(
-            f"Sorry! File is not supported for now. I can download only .mp4, .mkv and .webm files."
+            f"Sorry! File is not supported for now. I can download only .mp4, .mkv, .mov, .png, .jpg and .webm files."
         )
     if int(data["sizebytes"]) > 524288000 and m.sender_id not in [6478563263]:
         return await hm.edit(
@@ -236,9 +239,9 @@ async def handle_message(m: Message):
             caption=f"""
 File Name: `{data['file_name']}`
 Size: **{data["size"]}** 
-Direct Link: [Click Here](https://t.me/teraboxdown_bot?start={uuid})
+Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
 
-@RoldexVerse
+@mavimods2
 """,
             supports_streaming=True,
             spoiler=True,
@@ -260,9 +263,9 @@ Direct Link: [Click Here](https://t.me/teraboxdown_bot?start={uuid})
             caption=f"""
 File Name: `{data['file_name']}`
 Size: **{data["size"]}** 
-Direct Link: [Click Here](https://t.me/teraboxdown_bot?start={uuid})
+Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
 
-@RoldexVerse
+@mavimods2
 """,
             progress_callback=progress_bar,
             thumb=thumbnail if thumbnail else None,
