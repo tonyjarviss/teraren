@@ -156,12 +156,7 @@ async def handle_message(m: Message):
                 with_my_score=True,
             )
         )
-        db.set(m.sender_id, time.monotonic(), ex=0)
-        db.set(
-            f"check_{m.sender_id}",
-            int(count) + 1 if count else 1,
-            ex=7200,
-        )
+        
 
         return
 
@@ -297,12 +292,7 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
                 with_my_score=True,
             )
         )
-        db.set(m.sender_id, time.monotonic(), ex=60)
-        db.set(
-            f"check_{m.sender_id}",
-            int(count) + 1 if count else 1,
-            ex=7200,
-        )
+        
 
 
 bot.start(bot_token=BOT_TOKEN)
