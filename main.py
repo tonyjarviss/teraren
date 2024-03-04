@@ -133,7 +133,9 @@ async def handle_message(m: Message):
         return await m.reply(
             "Please join @mavimods2 then send me the link again."
         )
-    
+    hm = await m.reply("Sending you the media wait...")
+    count = db.get(f"check_{m.sender_id}")
+    )
     shorturl = extract_code_from_url(url)
     if not shorturl:
         return await hm.edit("Seems like your link is invalid.")
@@ -176,7 +178,10 @@ async def handle_message(m: Message):
         return await hm.edit(
             f"Sorry! File is not supported for now. I can download only .mp4, .mkv, .mov, .png, .jpg and .webm files."
         )
-    
+    if int(data["sizebytes"]) > 524288000 and m.sender_id not in [1317173146]:
+        return await hm.edit(
+            f"Sorry! File is too big. I can download only 500MB and this file is of {data['size']} ."
+        )
 
     start_time = time.time()
     cansend = CanSend()
