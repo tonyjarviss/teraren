@@ -134,8 +134,8 @@ async def handle_message(m: Message):
             "Please join @mavimods2 then send me the link again."
         )
     hm = await m.reply("Sending you the media wait...")
-    count = db.get(f"check_{m.sender_id}")
-    )
+    
+    
     shorturl = extract_code_from_url(url)
     if not shorturl:
         return await hm.edit("Seems like your link is invalid.")
