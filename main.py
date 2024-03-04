@@ -164,7 +164,7 @@ async def handle_message(m: Message):
                 with_my_score=True,
             )
         )
-        db.set(m.sender_id, time.monotonic(), ex=60)
+        db.set(m.sender_id, time.monotonic(), ex=0)
         db.set(
             f"check_{m.sender_id}",
             int(count) + 1 if count else 1,
