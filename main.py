@@ -47,7 +47,7 @@ async def start(m: UpdateNewMessage):
 Hello! I am a bot to download videos from terabox.
 Send me the terabox link and I will start downloading it.
 """
-    button1 = InlineKeyboardButton(text="Join Channel", callback_url="https://t.me/mavimods2") 
+ InlineKeyboardButton(text="Join Channel", callback_url="https://t.me/mavimods2") 
 
     check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
     if not check_if:
