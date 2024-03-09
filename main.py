@@ -34,19 +34,31 @@ db = redis.Redis(
 )
 
 
-bot.start(async (ctx) => {
-    try {
-      ctx.reply(
-        `Hi ${ctx.message.from.first_name},\n\nI can Download Files from Terabox.\n\nMade with ❤️ by @botcodes123\n\nSend any terabox link to download.`,
-        Markup.inlineKeyboard([
-          Markup.button.url(" Channel", "https://t.me/botcodes123"),
-          Markup.button.url("Report bug", "https://t.me/Armanidrisi_bot"),
-        ]),
-      );
-    } catch (e) {
-      console.error(e);
-    }
-  });
+@bot.on(
+    events.NewMessage(
+        pattern="/start$",
+        incoming=True,
+        outgoing=False,
+        func=lambda x: x.is_private,
+    )
+)
+async def start(m: UpdateNewMessage):
+    reply_text = f"""
+Hello! I am a bot to download videos from terabox.
+Send me the terabox link and I will start downloading it.
+Join @mavimods2 For Updates
+"""
+    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    if not check_if:
+        return await m.reply("Please join @mavimods2 then send me the link again.")
+    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    if not check_if:
+        return await m.reply(
+            "Please join @mavimods2 then send me the link again."
+        )
+    await m.reply(reply_text, link_preview=False, parse_mode="markdown")
+
+
 
     
 @bot.on(
