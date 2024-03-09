@@ -40,17 +40,7 @@ def send_start(client: pyrogram.client.Client, message: pyrogram.types.messages_
 	reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("🌐 Update Channel", url="https://t.me/mavimods2")]]), reply_to_message_id=message.id)
 
 
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
-    if not check_if:
-        return await m.reply("Please join @mavimods2 then send me the link again.")
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
-    if not check_if:
-        return await m.reply(
-            "Please join @mavimods2 then send me the link again."
-        )
-    await m.reply(reply_text, link_preview=False, parse_mode="markdown")
-
-
+    
 @bot.on(
     events.NewMessage(
         pattern="/start (.*)",
