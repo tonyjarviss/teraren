@@ -34,20 +34,11 @@ db = redis.Redis(
 )
 
 
-@bot.on(
-    events.NewMessage(
-        pattern="/start$",
-        incoming=True,
-        outgoing=False,
-        func=lambda x: x.is_private,
-    )
-)
-async def start(m: UpdateNewMessage):
-    reply_text = f"""
-Hello! I am a bot to download videos from terabox.
-Send me the terabox link and I will start downloading it.
-"""
- reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("🌐 Update Channel", url="https://t.me/mavimods2")]]), reply_to_message_id=message.id) 
+@bot.on_message(filters.command(["start"]))
+def send_start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
+	bot.send_message(message.chat.id, f"**__👋 Hi** **{message.from_user.mention}**, **I am Save Restricted Bot, I can send you restricted content by it's post link__**\n\n{USAGE}",
+	reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("🌐 Update Channel", url="https://t.me/mavimods2")]]), reply_to_message_id=message.id)
+
 
     check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
     if not check_if:
