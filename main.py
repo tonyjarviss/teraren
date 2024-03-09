@@ -9,7 +9,8 @@ import telethon.tl.types
 from telethon import TelegramClient, events
 from telethon.tl.functions.messages import ForwardMessagesRequest
 from telethon.types import Message, UpdateNewMessage
-
+from aiogram import Bot, Dispatcher, executor, types 
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton 
 from cansend import CanSend
 from config import *
 from terabox import get_data
@@ -46,9 +47,8 @@ async def start(m: UpdateNewMessage):
 Hello! I am a bot to download videos from terabox.
 Send me the terabox link and I will start downloading it.
 """
-    Markup.inlineKeyboard([
-          Markup.button.url(" Channel", "https://t.me/mavimods2")
-        ])
+    button1 = InlineKeyboardButton(text="Join Channel", callback_url="https://t.me/mavimods2") 
+
     check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply("Please join @mavimods2 then send me the link again.")
