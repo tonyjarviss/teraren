@@ -45,7 +45,10 @@ async def start(m: UpdateNewMessage):
     reply_text = f"""
 Hello! I am a bot to download videos from terabox.
 Send me the terabox link and I will start downloading it.
-Join @mavimods2 For Updates"""
+"""
+    Markup.inlineKeyboard([
+          Markup.button.url(" Channel", "https://t.me/mavimods2")
+        ])
     check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply("Please join @mavimods2 then send me the link again.")
