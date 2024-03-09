@@ -34,11 +34,19 @@ db = redis.Redis(
 )
 
 
-@bot.on(events.NewMessage(["start"]))
-def send_start(client: pyrogram.client.Client, message: pyrogram.types.messages_and_media.message.Message):
-	bot.send_message(message.chat.id, f"**__👋 Hi** **{message.from_user.mention}**, **I am Save Restricted Bot, I can send you restricted content by it's post link__**\n\n{USAGE}",
-	reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("🌐 Update Channel", url="https://t.me/mavimods2")]]), reply_to_message_id=message.id)
-
+bot.start(async (ctx) => {
+    try {
+      ctx.reply(
+        `Hi ${ctx.message.from.first_name},\n\nI can Download Files from Terabox.\n\nMade with ❤️ by @botcodes123\n\nSend any terabox link to download.`,
+        Markup.inlineKeyboard([
+          Markup.button.url(" Channel", "https://t.me/botcodes123"),
+          Markup.button.url("Report bug", "https://t.me/Armanidrisi_bot"),
+        ]),
+      );
+    } catch (e) {
+      console.error(e);
+    }
+  });
 
     
 @bot.on(
