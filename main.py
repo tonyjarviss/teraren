@@ -2,17 +2,6 @@ import asyncio
 import os
 import time
 from uuid import uuid4
-const express = require('express')
-const app = express()
-const port = 4000;
-
-client.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-client.listen(port, () => {
-  console.log(`Example app listening on port 4000`)
-})
 
 import redis
 import telethon
@@ -315,4 +304,4 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
         
 
 client.start(bot_token=BOT_TOKEN)
-client.run_until_disconnected()
+client.run()
