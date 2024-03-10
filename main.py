@@ -24,7 +24,7 @@ from tools import (
     is_user_on_chat,
 )
 
-bot = TelegramClient("tele", API_ID, API_HASH)
+client = TelegramClient("tele", API_ID, API_HASH)
 
 db = redis.Redis(
     host=HOST,
@@ -303,6 +303,5 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
         )
         
 
-
-bot.start(bot_token=BOT_TOKEN)
-bot.loop.run_until_complete()
+client.start(bot_token=BOT_TOKEN)
+client.loop.run_until_complete()
