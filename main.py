@@ -304,4 +304,4 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
         
 
 client.start(bot_token=BOT_TOKEN)
-client.loop.run_until_complete()
+client.run_until_disconnected()
