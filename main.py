@@ -34,7 +34,7 @@ db = redis.Redis(
 )
 
 
-@bot.on(
+@client.on(
     events.NewMessage(
         pattern="/start$",
         incoming=True,
@@ -48,10 +48,10 @@ Hello! I am a bot to download videos from terabox.
 Send me the terabox link and I will start downloading it.
 Join @mavimods2 For Updates
 """
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    check_if = await is_user_on_chat(client, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply("Please join @mavimods2 then send me the link again.")
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    check_if = await is_user_on_chat(client, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply(
             "Please join @mavimods2 then send me the link again."
@@ -61,7 +61,7 @@ Join @mavimods2 For Updates
 
 
     
-@bot.on(
+@client.on(
     events.NewMessage(
         pattern="/start (.*)",
         incoming=True,
@@ -72,15 +72,15 @@ Join @mavimods2 For Updates
 async def start(m: UpdateNewMessage):
     text = m.pattern_match.group(1)
     fileid = db.get(str(text))
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    check_if = await is_user_on_chat(client, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply("Please join @mavimods2 then send me the link again.")
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    check_if = await is_user_on_chat(client, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply(
             "Please join @mavimods2 then send me the link again."
         )
-    await bot(
+    await client(
         ForwardMessagesRequest(
             from_peer=PRIVATE_CHAT_ID,
             id=[int(fileid)],
@@ -94,7 +94,7 @@ async def start(m: UpdateNewMessage):
     )
 
 
-@bot.on(
+@client.on(
     events.NewMessage(
         pattern="/remove (.*)",
         incoming=True,
@@ -111,7 +111,7 @@ async def remove(m: UpdateNewMessage):
         await m.reply(f"{user_id} is not in the list.")
 
 
-@bot.on(
+@client.on(
     events.NewMessage(
         incoming=True,
         outgoing=False,
@@ -129,10 +129,10 @@ async def handle_message(m: Message):
     url = get_urls_from_string(m.text)
     if not url:
         return await m.reply("Please enter a valid url.")
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    check_if = await is_user_on_chat(client, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply("Please join @mavimods2 then send me the link again.")
-    check_if = await is_user_on_chat(bot, "@mavimods2", m.peer_id)
+    check_if = await is_user_on_chat(client, "@mavimods2", m.peer_id)
     if not check_if:
         return await m.reply(
             "Please join @mavimods2 then send me the link again."
@@ -150,7 +150,7 @@ async def handle_message(m: Message):
         except:
             pass
 
-        await bot(
+        await client(
             ForwardMessagesRequest(
                 from_peer=PRIVATE_CHAT_ID,
                 id=[int(fileid)],
@@ -224,7 +224,7 @@ async def handle_message(m: Message):
     thumbnail = download_image_to_bytesio(data["thumb"], "thumbnail.png")
 
     try:
-        file = await bot.send_file(
+        file = await client.send_file(
             PRIVATE_CHAT_ID,
             file=data["direct_link"],
             thumb=thumbnail if thumbnail else None,
@@ -250,7 +250,7 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
                 f"Sorry! Download Failed but you can download it from [here]({data['direct_link']}).",
                 parse_mode="markdown",
             )
-        file = await bot.send_file(
+        file = await client.send_file(
             PRIVATE_CHAT_ID,
             download,
             caption=f"""
@@ -288,7 +288,7 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
     if file:
         db.set(uuid, file.id)
 
-        await bot(
+        await client(
             ForwardMessagesRequest(
                 from_peer=PRIVATE_CHAT_ID,
                 id=[file.id],
