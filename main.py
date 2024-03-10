@@ -305,4 +305,4 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
 
 
 bot.start(bot_token=BOT_TOKEN)
-bot.run()
+bot.loop.run_until_complete(main())
