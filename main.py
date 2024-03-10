@@ -301,7 +301,9 @@ Direct Link: [Click Here](https://t.me/MaviTerabox_bot?start={uuid})
                 with_my_score=True,
             )
         )
-        
+loop = asyncio.get_event_loop()
 
-client.start(bot_token=BOT_TOKEN)
-client.run()
+async def main():
+    await client.start(bot_token=BOT_TOKEN)
+    await client.disconnect()
+loop.run_until_complete(main())
